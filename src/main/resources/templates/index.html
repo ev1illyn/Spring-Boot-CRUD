@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Insert title here</title>
+	
+	</head>
+	<body>
+		<h1>Lista de Eventos</h1>
+		<h3>
+			<a href="/cadastrarEvento">Cadastrar evento</a>
+		</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Local</th>
+					<th>Data</th>
+					<th>Horário</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="evento : ${evento}">
+					<td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.nome}"></span></a></td>
+					<td><span th:text="${evento.local}"></span></td>
+					<td><span th:text="${evento.data}"></span></td>
+					<td><span th:text="${evento.horario}"></span></td>
+					<td><a th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.codigo)).build()}">remover: <span th:text="${evento.nome}">?</span></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

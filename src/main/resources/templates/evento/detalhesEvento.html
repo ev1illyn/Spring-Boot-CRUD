@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Insert title here</title>
+
+</head>
+<body>
+	<h1>Eventos</h1>
+	<h3>
+		<a href="/evento">Lista de Eventos</a>
+	</h3>
+
+	<label><i>LISTA DE EVENTOS</i></label><br/>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Local</th>
+				<th>Data</th>
+				<th>Horário</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="evento : ${evento}">
+				<td><span th:text="${evento.nome}"></span></td>
+				<td><span th:text="${evento.local}"></span></td>
+				<td><span th:text="${evento.data}"></span></td>
+				<td><span th:text="${evento.horario}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+
+	<th:block th:include="mensagemValidacao"></th:block>
+
+	<label><i>LISTA DE CONVIDADOS</i></label><br/>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome do Convidado</th>
+				<th>RG</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="convidado : ${convidado}">
+				<td><span th:text="${convidado.nomeConvidado}"></span></td>
+				<td><span th:text="${convidado.rg}"></span></td>
+				<td><a th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.rg)).build()}">remover convidado: <span th:text="${convidado.nomeConvidado}">?</span></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<form method="POST">
+		<input type="text" value="" name="nomeConvidado" /> <input
+			type="text" value="" name="rg" />
+		<button type="submit">adicionar convidado</button>
+	</form>
+</body>
+</html>
